@@ -1,0 +1,106 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<style>
+table, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
+</head>
+<body>
+Please enter isbn number of the book
+<input id="searchisbn" />
+<div id="resultisbn"></div> 
+
+<script type="text/javascript">
+$(document).ready(function(){
+$('#searchisbn').change(function(){
+  $.ajax({
+    url: "getisbn.php",
+    dataType: 'text',
+	data: 'isbn=' + $('#searchisbn').val(),
+    success: function(data1) {
+	var dat= data1; 
+	 var mylist=JSON.parse(dat);
+	 //alert(mylist.items[0].accessInfo.country);
+	 var a=mylist.items[0].accessInfo.country;
+	 var b=mylist.items[0].accessInfo.viewability;
+	 var c=mylist.items[0].accessInfo.webReaderLink;
+	 var d=mylist.items[0].accessInfo.pdf.acsTokenLink;
+	 var e=mylist.items[0].accessInfo.textToSpeechPermission;
+	 var f=mylist.items[0].volumeInfo.title;
+	 var g=mylist.items[0].volumeInfo.publisher;
+	 var h=mylist.items[0].volumeInfo.subtitle;
+	 var i=mylist.items[0].volumeInfo.publishedDate;
+	 var j=mylist.items[0].volumeInfo.description;
+	 var k=mylist.items[0].volumeInfo.pageCount;
+	 $('#a').html(a);
+	 $('#b').html(b);
+	 $('#c').html(c);
+	 $('#d').html(d);
+	 $('#e').html(e);
+	 $('#f').html(f);
+	 $('#g').html(g);
+	 $('#h').html(h);
+	 $('#i').html(i);
+	 $('#j').html(j);
+	 $('#k').html(k);
+	  
+    },
+    error: function() {
+      alert("error");
+    }
+  });        
+});
+});
+</script>
+<table  style="width:100%;border-collapse: collapse ">
+<tr>
+<td> Country: </td>
+<td id='a'></td>
+</tr>
+<tr>
+<td> Viewability:</td>
+<td id='b'></td>
+</tr>
+<tr>
+<td> webReaderLink:</td>
+<td id='c'></td>
+</tr>
+<tr>
+<td>pdfaccesstoken:</td>
+<td id='d'></td>
+</tr>
+<tr>
+<td>TexttoSpeech:</td>
+<td id='e'></td>
+</tr>
+<tr>
+<td> title:</td>
+<td id='f'></td>
+</tr>
+<tr>
+<td> publisher:</td>
+<td id='g'></td>
+</tr>
+<tr>
+<td>Subtitle:</td>
+<td id='h'></td>
+</tr>
+<tr>
+<td> publishedDate:</td>
+<td id='i'></td>
+</tr>
+<tr>
+<td> description:</td>
+<td id='j'></td>
+</tr>
+<tr>
+<td> pagecount:</td>
+<td id='k'></td>
+</tr>
+</table>
+
+</body>
+</html>
